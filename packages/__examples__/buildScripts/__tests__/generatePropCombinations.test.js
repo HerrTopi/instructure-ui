@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { expect } from '@instructure/ui-test-utils'
 
+// Note: This test should be in the .storybook folder, but our test runner ignores
+// folders that start with "." for some reason
 import generatePropCombinations from '../../.storybook/stories/generatePropCombinations'
 
 describe('generatePropCombinations', () => {

@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { expect } from '@instructure/ui-test-utils'
 import parsePropValues from '../parsePropValues'
 
@@ -50,8 +51,10 @@ export default class TestComponent extends Component {
 `
 
 describe('parsePropValues', () => {
-  expect(parsePropValues(src)).to.deep.equal({
-    variant: ['circle', 'rectangle'],
-    show: [false, true]
+  it('should parse a component correctly', () => {
+    expect(parsePropValues(src, "testFilename")).to.deep.equal({
+      variant: ['circle', 'rectangle'],
+      show: [false, true]
+    })
   })
 })

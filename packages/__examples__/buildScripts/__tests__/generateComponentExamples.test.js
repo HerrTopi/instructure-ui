@@ -21,10 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { expect } from '@instructure/ui-test-utils'
 
+// Note: This test should be in the .storybook folder, but our test runner ignores
+// folders that start with "." for some reason
 import generateComponentExamples from '../../.storybook/stories/generateComponentExamples'
 
 class TestComponent extends Component {

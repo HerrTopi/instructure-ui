@@ -40,7 +40,7 @@ const examplesContext = require.context(
 const componentsContext = require.context(
   '../../../',
   true,
-  /^.*\/src\/.*\/index\.js$/,
+  /.*ui-.*\/src\/.*\/index\.js$/,
   'sync'
 )
 

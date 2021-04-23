@@ -43,7 +43,9 @@
     "webpack-merge": "^4.2.1"
   },
   "devDependencies": {
+    "@instructure/ui-test-utils": "^8.2.1",
     "globby": "^11",
-    "react-docgen": "^5"
+    "react-docgen": "^5",
+    "prop-types": "^15"
   }
 }
