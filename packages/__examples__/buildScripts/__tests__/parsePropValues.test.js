@@ -21,9 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { expect } from '@instructure/ui-test-utils'
+import parsePropValues from '../parsePropValues'
 
-module.exports = {
-  'component-examples-loader': require.resolve(
-    '@instructure/ui-component-examples/lib/component-examples-loader'
-  )
+const src = `import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+export default class TestComponent extends Component {
+  static propTypes = {
+    variant: PropTypes.oneOf(['circle', 'rectangle']),
+    show: PropTypes.bool,
+    message: PropTypes.object,
+    children: PropTypes.node
+  }
+
+  static defaultProps = {
+    variant: 'circle',
+    show: true,
+    message: null
+  }
+
+  render () {
+    return (
+      <span>{this.props.children}</span>
+    )
+  }
 }
+`
+
+describe('parsePropValues', () => {
+  expect(parsePropValues(src)).to.deep.equal({
+    variant: ['circle', 'rectangle'],
+    show: [false, true]
+  })
+})

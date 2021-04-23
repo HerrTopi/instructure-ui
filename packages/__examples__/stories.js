@@ -23,10 +23,12 @@
  */
 
 import { storiesOf } from '@storybook/react'
-
 import { renderExample } from './renderExample.js'
 import { renderPage } from './renderPage.js'
+import generateComponentExamples from './generateComponentExamples.js'
 import React from 'react'
+// must be imported with Webpack because this file cannot contain async calls
+import propJSONData from './prop-data.json'
 
 const examplesContext = require.context(
   '../',
@@ -35,18 +37,42 @@ const examplesContext = require.context(
   'sync'
 )
 
-let numStories = 0
-// eslint-disable-next-line no-console
-console.log(
-  `Creating stories for ${examplesContext.keys().length} components...`
+const componentsContext = require.context(
+  '../',
+  true,
+  /^.*\/src\/.*\/index\.js$/,
+  'sync'
 )
 
+const everyExample = {}
 examplesContext.keys().map((requirePath) => {
-  const ctx = examplesContext(requirePath) // comes from component-examples-loader.js
+  const exampleDir = requirePath.split("/").slice(0,-2).join('/')
+  const exampleModule = componentsContext(exampleDir + '/index.js')
+  const componentName = exampleModule.default.displayName || exampleModule.default.name
+  everyExample[componentName] = exampleModule
+})
 
-  if (ctx.sections && ctx.sections.length > 0) {
-    const stories = storiesOf(ctx.componentName, module)
-    ctx.sections.forEach(({ pages, sectionName }) => {
+let numStories = 0
+// eslint-disable-next-line no-console
+console.log(`Creating stories for ${examplesContext.keys().length} components..`)
+
+examplesContext.keys().map((requirePath) => {
+  // ctx holds an xyz.examples.js file, was {componentName, sections}
+  const ctx = examplesContext(requirePath)
+  const config = ctx.default
+  const pathParts = requirePath.split("/")
+  const componentName = pathParts[pathParts.length - 3]
+  const Component = everyExample[componentName].default
+  const generatedPropValues = propJSONData[componentName]
+  // merge in generated prop values:
+  config.propValues = Object.assign(generatedPropValues,config.propValues || {})
+  config.maxExamples = config.maxExamples ? config.maxExamples : 500
+
+  const sections = generateComponentExamples(Component, config)
+
+  if (sections && sections.length > 0) {
+    const stories = storiesOf(componentName, module)
+    sections.forEach(({ pages, sectionName }) => {
       pages.forEach((page, i) => {
         // eslint-disable-next-line no-param-reassign
         page.renderExample = renderExample
@@ -67,6 +93,5 @@ examplesContext.keys().map((requirePath) => {
     })
   }
 })
-
 // eslint-disable-next-line no-console
 console.log(`Created ${numStories} stories!`)

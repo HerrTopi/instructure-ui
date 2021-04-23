@@ -11,6 +11,7 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
+    "buildExampleJSON": "node buildScripts/build-examples-json.js",
     "prestart": "yarn bundle",
     "start": "ui-scripts --server -p 9001",
     "start:watch": "ui-build --examples --watch -p 9090",
@@ -32,6 +33,7 @@
     "@instructure/ui-icons": "^8.2.1",
     "@instructure/ui-tooltip": "^8.2.1",
     "@instructure/ui-view": "^8.2.1",
+    "@instructure/uid": "^8.2.1",
     "@instructure/ui-webpack-config": "^8.2.1",
     "@storybook/addons": "^6.1.18",
     "@storybook/react": "^6.1.18",
@@ -41,5 +43,9 @@
     "react-dom": "^16.8",
     "story2sketch": "^1.7.1",
     "webpack-merge": "^4.2.1"
+  },
+  "devDependencies": {
+    "globby": "^11",
+    "react-docgen": "^5"
   }
 }
