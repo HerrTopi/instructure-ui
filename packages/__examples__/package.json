@@ -27,7 +27,6 @@
     "@instructure/canvas-theme": "^8.2.1",
     "@instructure/ui-babel-preset": "^8.2.1",
     "@instructure/ui-buttons": "^8.2.1",
-    "@instructure/ui-component-examples": "^8.2.1",
     "@instructure/ui-i18n": "^8.2.1",
     "@instructure/ui-icons": "^8.2.1",
     "@instructure/ui-tooltip": "^8.2.1",
