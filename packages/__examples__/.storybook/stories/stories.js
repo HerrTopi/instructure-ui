@@ -28,28 +28,28 @@ import { renderPage } from './renderPage.js'
 import generateComponentExamples from './generateComponentExamples.js'
 import React from 'react'
 // must be imported with Webpack because this file cannot contain async calls
-import propJSONData from './prop-data.json'
+import propJSONData from '../../prop-data.json'
 
 const examplesContext = require.context(
-  '../',
+  '../../../',
   true,
   /^.*\/src\/.*\.examples\.js$/,
   'sync'
 )
 
 const componentsContext = require.context(
-  '../',
+  '../../../',
   true,
   /^.*\/src\/.*\/index\.js$/,
   'sync'
 )
 
-const everyExample = {}
+const everyComponent = {}
 examplesContext.keys().map((requirePath) => {
   const exampleDir = requirePath.split("/").slice(0,-2).join('/')
-  const exampleModule = componentsContext(exampleDir + '/index.js')
-  const componentName = exampleModule.default.displayName || exampleModule.default.name
-  everyExample[componentName] = exampleModule
+  const componentModule = componentsContext(exampleDir + '/index.js')
+  const componentName = componentModule.default.displayName || componentModule.default.name
+  everyComponent[componentName] = componentModule
 })
 
 let numStories = 0
@@ -57,18 +57,16 @@ let numStories = 0
 console.log(`Creating stories for ${examplesContext.keys().length} components..`)
 
 examplesContext.keys().map((requirePath) => {
-  // ctx holds an xyz.examples.js file, was {componentName, sections}
-  const ctx = examplesContext(requirePath)
-  const config = ctx.default
+  const ExamplesModule = examplesContext(requirePath).default // xy.example.js
   const pathParts = requirePath.split("/")
   const componentName = pathParts[pathParts.length - 3]
-  const Component = everyExample[componentName].default
+  const Component = everyComponent[componentName].default
   const generatedPropValues = propJSONData[componentName]
   // merge in generated prop values:
-  config.propValues = Object.assign(generatedPropValues,config.propValues || {})
-  config.maxExamples = config.maxExamples ? config.maxExamples : 500
+  ExamplesModule.propValues = Object.assign(generatedPropValues,ExamplesModule.propValues || {})
+  ExamplesModule.maxExamples = ExamplesModule.maxExamples ? ExamplesModule.maxExamples : 500
 
-  const sections = generateComponentExamples(Component, config)
+  const sections = generateComponentExamples(Component, ExamplesModule)
 
   if (sections && sections.length > 0) {
     const stories = storiesOf(componentName, module)

@@ -58,7 +58,7 @@ if (args.includes('--watch')) {
   // --no-manager-cache is a workaround for
   // https://github.com/storybookjs/storybook/issues/13200
   // -c: config directory
-  commandArgs = ['-c', '.storybook', '-p', port, '--no-manager-cache']
+  commandArgs = ['-c', '.storybook', '-p', port, '--no-manager-cache', '--quiet']
   envVars = envVars
     .concat([
       'NODE_ENV=development',

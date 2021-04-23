@@ -11,10 +11,9 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "buildExampleJSON": "node buildScripts/build-examples-json.js",
-    "prestart": "yarn bundle",
-    "start": "ui-scripts --server -p 9001",
-    "start:watch": "ui-build --examples --watch -p 9090",
+    "prestart": "node buildScripts/build-examples-json.js && yarn bundle",
+    "start": " ui-scripts --server -p 9001",
+    "start:watch": "node buildScripts/build-examples-json.js && ui-build --examples --watch -p 9090",
     "build-storybook": "yarn bundle",
     "test:vrt": "ui-test --vrt -p 9001",
     "accept:vrt": "ui-test --vrt -p 9001 --auto-accept-changes",

@@ -23,7 +23,7 @@
  */
 import { expect } from '@instructure/ui-test-utils'
 
-import generatePropCombinations from '../../generatePropCombinations'
+import generatePropCombinations from '../../.storybook/stories/generatePropCombinations'
 
 describe('generatePropCombinations', () => {
   it('should return [] when passed empty prop values', () => {

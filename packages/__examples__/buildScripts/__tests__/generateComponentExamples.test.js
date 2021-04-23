@@ -25,7 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { expect } from '@instructure/ui-test-utils'
 
-import generateComponentExamples from '../../generateComponentExamples'
+import generateComponentExamples from '../../.storybook/stories/generateComponentExamples'
 
 class TestComponent extends Component {
   render() {

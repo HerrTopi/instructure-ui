@@ -22,6 +22,10 @@
  * SOFTWARE.
  */
 
+const outputName = 'prop-data.json'
+// eslint-disable-next-line no-console
+console.log("starting to build example prop combinations to " + outputName)
+
 const path = require('path')
 const fs = require('fs')
 const globby = require('globby')
@@ -48,9 +52,8 @@ globby([files, ...ignore]).then((matches) => {
       componentProps[componentName] = generatedPropValues
     })
   const everything = JSON.stringify(componentProps)
-  const buildDir = './__build__/'
-  if (!fs.existsSync(buildDir)) {
-    fs.mkdirSync(buildDir)
-  }
-  fs.writeFileSync("prop-data.json", everything)
+  fs.writeFileSync(outputName, everything)
+
+  // eslint-disable-next-line no-console
+  console.log("finished generating example prop combinations.")
 })
