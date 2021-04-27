@@ -10,5 +10,5 @@ jobs:
           fetch-depth: 0
       - name: Teszt
         env:
-          COMMIT_MESSAGE: ${git log --format=%B -n 1 ${{ github.event.after }}}
+          COMMIT_MESSAGE: ${{git log --format=%B -n 1 ${{ github.event.after }}}}
         run: echo "$COMMIT_MESSAGE"
