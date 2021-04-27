@@ -1,10 +1,5 @@
 name: Release older version to npm only.
-on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
-  push:
-    branches:
-      - master
+on: workflow_dispatch
 jobs:
   release:
     runs-on: ubuntu-latest
