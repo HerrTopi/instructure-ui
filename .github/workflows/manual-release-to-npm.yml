@@ -10,7 +10,7 @@ jobs:
           fetch-depth: 0
       - name: Teszt
         run: |
-          echo "action_state=${git log --format=%B -n 1 ${{ github.event.after }}}" >> $GITHUB_ENV
+          echo "action_state=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV
       - name: Use the value
         id: step_two
         run: |
