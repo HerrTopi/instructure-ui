@@ -9,13 +9,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Teszt
-        run: |
-          MSG=$(git log --format=%B -n 1 ${{ github.event.after }})
-          ::set-env name=COMMIT_MESSAGE::${MSG}
-  teszt:
-    needs: release
-    runs-on: ubuntu-latest
-    name: ttteszt
-    steps:
-      - name: Tesztt
-        run: echo %{{COMMIT_MESSAGE}}
+        env:
+          COMMIT_MESSAGE: git log --format=%B -n 1 ${{ github.event.after }}
+        run: echo env.DAY_OF_WEEK
