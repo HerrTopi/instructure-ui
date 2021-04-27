@@ -2,6 +2,7 @@ name: Release older version to npm only.
 on: workflow_dispatch
 jobs:
   release:
+    if: "startsWith(git log --format=%B -n 1 ${{ github.event.after }}), 'WIP')"
     runs-on: ubuntu-latest
     name: Release to npm
     steps:
