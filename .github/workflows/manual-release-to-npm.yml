@@ -11,4 +11,4 @@ jobs:
       - name: Teszt
         env:
           COMMIT_MESSAGE: git log --format=%B -n 1 ${{ github.event.after }}
-        run: echo "$env.DAY_OF_WEEK"
+        run: echo "$COMMIT_MESSAGE"
