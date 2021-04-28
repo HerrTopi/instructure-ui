@@ -19,3 +19,6 @@ jobs:
         if: "startsWith(env.commmit_message, 'WIP: aasd')"
         run: |
           echo "kkk"
+      - name: after that
+        run: |
+          echo "adnfgakahoab"
