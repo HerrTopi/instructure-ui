@@ -17,7 +17,7 @@ jobs:
           echo "${{ env.commmit_message }}" # This will output 'yellow'
   tryit:
     needs: release
-    if: "startsWith(${{ env.commmit_message }}, 'WIP: asd')"
+    if: "startsWith($(env.commmit_message), 'WIP: asd')"
     runs-on: ubuntu-latest
     name: Release to npm
     steps:
