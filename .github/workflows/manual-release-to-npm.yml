@@ -22,4 +22,4 @@ jobs:
     steps:
       - name: Get commit message
         run: |
-          echo "${{ env }}"
+          echo "${{ env.commit_message }}"
