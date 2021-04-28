@@ -16,6 +16,6 @@ jobs:
         run: |
           echo "${{ env.commmit_message }}" # This will output 'yellow'
       - name: If whatev
-        if: "startsWith(env.commmit_message, 'WIP: asd')"
+        if: "startsWith(env.commmit_message, 'WIP: aasd')"
         run: |
           echo "kkk"
