@@ -15,11 +15,7 @@ jobs:
         id: step_two
         run: |
           echo "${{ env.commmit_message }}" # This will output 'yellow'
-  tryit:
-    needs: release
-    runs-on: ubuntu-latest
-    name: Release to npm
-    steps:
-      - name: Get commit message
+      - name: If whatev
+        if: "startsWith(env.commmit_message, 'WIP: asd')"
         run: |
-          echo "${{ env.commit_message }}"
+          echo "kkk"
